@@ -13,7 +13,7 @@ const Dialogs = props => {
       <div className={st.dialog}>{dialogs}</div>
       <div className={st.messages}>
         {messages}
-        <NewMessage dispatch={props.dispatch} 
+        <NewMessage addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText}
         dialogs={props.dialogs}/>
       </div>
     </div>

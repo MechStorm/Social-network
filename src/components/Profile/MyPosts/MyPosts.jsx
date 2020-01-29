@@ -1,23 +1,21 @@
 import React from "react";
 import st from "./MyPosts.module.css";
-import { addPostCreate, updateNewPostCreate } from "../../Redux/profile-reducer";
-
 
 const MyPosts = (props) => {
+
   let addPost = () => {
     if(props.posts.newPostText === '') {
       alert('Enter something');
       return;
     }
-    
-    props.dispatch(addPostCreate());
+    props.addPost();
   }
 
   let updateNewPostText = (event) => {
     let textVal = event.target.value;
-    let action = updateNewPostCreate(textVal);
-    props.dispatch(action);
+    props.updateNewPostText(textVal);
   }
+  
   return (
     <div className={st.posts}>
       <h2>Posts:</h2>

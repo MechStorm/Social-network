@@ -1,6 +1,5 @@
 import React from "react";
 import st from "./NewMessage.module.css";
-import { updateNewMessageCreate, addMessageCreate } from "../../../Redux/dialogs-reducer";
 
 const NewMessage = props => {
 
@@ -9,13 +8,12 @@ const NewMessage = props => {
       alert('Enter a message');
       return;
     }
-    props.dispatch(addMessageCreate());
+    props.addMessage();
   };
 
   let updateNewMessageText = (event) => {
     let textVal = event.target.value;
-    let action = updateNewMessageCreate(textVal);
-    props.dispatch(action);
+    props.updateNewMessageText(textVal);
   }
 
   return (

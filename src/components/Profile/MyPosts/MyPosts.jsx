@@ -5,7 +5,7 @@ import { addPostCreate, updateNewPostCreate } from "../../Redux/profile-reducer"
 
 const MyPosts = (props) => {
   let addPost = () => {
-    if(props.newText.newPostText === '') {
+    if(props.posts.newPostText === '') {
       alert('Enter something');
       return;
     }
@@ -26,7 +26,7 @@ const MyPosts = (props) => {
         <div className={st.post}>
           <div>
             <textarea onChange={updateNewPostText} name="text" id="01" cols="30" rows="3" placeholder="Enter your post message..."
-            value={props.newText.newPostText} />
+            value={props.posts.newPostText} />
           </div>
           <div>
             <button onClick={addPost}>Add post!</button>

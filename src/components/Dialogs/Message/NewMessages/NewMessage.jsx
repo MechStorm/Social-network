@@ -5,7 +5,7 @@ import { updateNewMessageCreate, addMessageCreate } from "../../../Redux/dialogs
 const NewMessage = props => {
 
   let addMessage = () => {
-    if(props.newMessageText === ''){
+    if(props.dialogs.newMessageText === ''){
       alert('Enter a message');
       return;
     }
@@ -21,7 +21,7 @@ const NewMessage = props => {
   return (
     <div className={st.newMessages}>
       <div className={st.newMessage}>
-        <textarea onChange={updateNewMessageText} cols="70" rows="3" placeholder="Enter your message..." value={props.newMessageText} />
+        <textarea onChange={updateNewMessageText} cols="70" rows="3" placeholder="Enter your message..." value={props.dialogs.newMessageText} />
       </div>
       <div className={st.newMessageBtn}>
         <button onClick={addMessage}>Add message</button>

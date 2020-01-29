@@ -1,0 +1,29 @@
+.nav {
+  grid-area: n;
+  background-color: rgb(221, 113, 12);
+  padding: 17px;
+}
+
+.item {
+  margin-bottom: 15px;
+}
+
+.item a {
+  color: #fff;
+  font-size: 22px;
+  text-decoration: none;
+  font-family: "Long Cang", cursive;
+}
+
+.item a.active {
+  font-style: italic;
+  color: rgb(17, 0, 255);
+}
+
+.friends{
+  margin-top: 150px;
+}
+
+.friendsAva{
+  display: flex;
+}

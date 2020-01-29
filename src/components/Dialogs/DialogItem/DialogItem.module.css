@@ -1,0 +1,23 @@
+.item {
+  padding-bottom: 20px;
+  display: flex;
+}
+
+.item a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.item a:hover {
+  color: gold;
+}
+
+.item a.active {
+  color: blue;
+}
+
+.peopleImg{
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}

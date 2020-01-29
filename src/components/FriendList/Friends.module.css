@@ -1,0 +1,21 @@
+.peopleCell{
+    margin: 15px 8px 0;
+    display: inline-block;
+    text-align: center;
+}
+
+.peopleCell img{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.peopleCellName a{
+    color: gold;
+}
+
+.peopleCellName a:hover{
+    color: gold;
+    text-decoration: underline;
+}

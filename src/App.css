@@ -1,0 +1,25 @@
+*, :before, :after{
+  box-sizing: border-box;
+  
+}
+
+.wrapper{
+  display: grid;
+  width: 1366px;
+  margin: 0 auto;
+  
+  grid-template-areas: 
+  'h h'
+  'n c';
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+}
+
+.wrapper-content{
+    grid-area: c;
+    background: url('https://i0.wp.com/north6960.com/wp-content/uploads/2018/09/cropped-wallpaper.wiki-Wonderful-Nebula-Galaxy-1080p-Space-Background-PIC-WPD008682.jpg?ssl=1') no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-size: 18px;
+    font-family: 'Long Cang', cursive;
+  }

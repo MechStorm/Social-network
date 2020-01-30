@@ -9,22 +9,18 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-const App = props => {
+const App = () => {
   return (
       <div className="wrapper">
         <Header />
-        <Navigation navList={ props.state.sidebar }/>
+        <Navigation />
         <div className="wrapper-content">
           <Route
             exact path="/profile"
-            render={() => <Profile posts={props.state.posts} 
-            store={props.store}
-            />} />
+            render={() => <Profile />} />
           <Route
             exact path="/dialogs"
-            render={() => <DialogsContainer dialogs={props.state.dialogs} 
-            store={props.store}
-          />} />
+            render={() => <DialogsContainer />} />
           <Route exact path="/news" component={News} />
           <Route exact path="/music" component={Music} />
           <Route exact path="/settings" component={Settings} />

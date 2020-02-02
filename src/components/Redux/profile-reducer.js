@@ -21,21 +21,27 @@ let initialState = {
     newPostText: ""
 };
 
+
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
-      let addedPost = {
+    case ADD_POST: {
+      let newPost = {
         id: 5,
         message: state.newPostText,
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjQ0RVqfW3wEqPrR9qzGfBdNtMPcLvPaZxjqJYaOYVGnh5ndJE&s",
         likeCount: 0
       };
-      state.postData.push(addedPost);
-      state.newPostText = "";
-      return state;
-    case ADD_NEW_POST_TEXT:
-      state.newPostText = action.textPost;
-      return state;
+      let stateCopy = {...state};
+      stateCopy.postData = [...state.postData];
+      stateCopy.postData.push(newPost);
+      stateCopy.newPostText = "";
+      return stateCopy;
+    }
+    case ADD_NEW_POST_TEXT: {
+      let stateCopy = {...state};
+      stateCopy.newPostText = action.textPost;
+      return stateCopy;
+    }
     default:
       return state;
   };

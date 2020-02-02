@@ -5,10 +5,9 @@ import Post from './Posts/Post';
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
-  debugger;
   return {
     post: state.posts.postData.map(p => (
-      <Post message={p.message} img={p.img} likeCount={p.likeCount} />
+      <Post message={p.message} key={p.id} img={p.img} likeCount={p.likeCount} />
     )),
     posts: state.posts
   }

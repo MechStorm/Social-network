@@ -34,6 +34,11 @@ const Navigation = props => {
           Settings
         </NavLink>
       </div>
+      <div className={st.item}>
+        <NavLink to="/users" activeClassName={st.active}>
+          Users
+        </NavLink>
+      </div>
       <div className={`${st.item} ${st.friends}`}>
         <NavLink to="/friends" activeClassName={st.active}>
           Friends

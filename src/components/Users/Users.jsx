@@ -1,41 +1,15 @@
 import React from "react";
 import st from "./Users.module.css";
+import * as axios from "axios";
+import standartImg from '../../assets/userphoto.png'
 
 const Users = props => {
 
   if(props.users.length === 0) {
-    props.setUsers([ 
-     {
-      follow: true,
-      id: 1,
-      message: "Hey",
-      img:
-        "https://comiccoverage.typepad.com/photos/uncategorized/2007/05/04/parker.jpg",
-      firstName: "Peter",
-      lastName: "Parker",
-      location: { city: "New York", country: "USA" }
-    },
-    {
-      follow: false,
-      id: 2,
-      message: "Wow!",
-      img:
-        "https://i.pinimg.com/originals/23/e0/13/23e013350c4ee8d4b1a36fe02b7b169c.jpg",
-      firstName: "Gwen",
-      lastName: "Stacy",
-      location: { city: "New York", country: "USA" }
-    },
-    {
-      follow: true,
-      id: 3,
-      message: "Hello",
-      img:
-        "https://media.wired.com/photos/5c8025dfedfea42f35917d1c/1:1/w_878,h_878,c_limit/Culture_CaptainMarvel7.jpg",
-      firstName: "Carol",
-      lastName: "Danvers",
-      location: { city: "New York", country: "USA" }
-    }
-  ]);
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+      debugger;
+      props.setUsers(response.data.items);
+    });
   }
   
   return (
@@ -45,7 +19,7 @@ const Users = props => {
           <div key={u.id} className={st.usersPage}>
             <div className={st.iconAndStatus}>
               <div>
-                <img src={u.img} alt={u.firstName} />
+                <img src={u.photos.small != null ? u.photos.small : standartImg} alt={'user'} />
               </div>
               <div className={st.followBtn}>
                 {
@@ -57,13 +31,13 @@ const Users = props => {
             </div>
             <div className={st.userStatus}>
               <div>
-                <p>{u.firstName} {u.lastName}</p>
-                <p>{u.message}</p>
+                <p>{u.name}</p>
+                <p>{u.status}</p>
               </div>
 
             <div className={st.userLocation}>
-                <div>{u.location.country}</div>
-                <div>{u.location.city}</div>
+                <div>{'u.location.country'}</div>
+                <div>{'u.location.city'}</div>
             </div>
             </div>   
           </div>

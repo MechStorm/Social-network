@@ -3,18 +3,36 @@ import st from "./Users.module.css";
 import * as axios from "axios";
 import standartImg from '../../assets/userphoto.png'
 
-const Users = props => {
+class Users extends React.Component {
+  constructor(props) {
+    super(props);
 
-  if(props.users.length === 0) {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-      debugger;
-      props.setUsers(response.data.items);
-    });
+  axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+      this.props.setUsers(response.data.items);
+      });
+
+  let addUsers = (page) => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`).then(response => {
+      this.props.setUsers(response.data.items);
+      });
+    } 
+
+  let nextPage = () => {
+    let page = 2;
+    
+    return () => {
+      return page++;
+    }
   }
   
-  return (
-    <div>
-      {props.users.map(u => {
+  this.addUsers = addUsers.bind(this);
+  this.next = nextPage().bind(this);
+  }
+ 
+  render() {
+    return(
+    <div>      
+      {this.props.users.map(u => {
         return (
           <div key={u.id} className={st.usersPage}>
             <div className={st.iconAndStatus}>
@@ -24,8 +42,8 @@ const Users = props => {
               <div className={st.followBtn}>
                 {
                 u.follow 
-                ? <button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button> 
-                : <button onClick={()=>{props.follow(u.id)}}>Follow</button>
+                ? <button onClick={()=>{this.props.unfollow(u.id)}}>Unfollow</button> 
+                : <button onClick={()=>{this.props.follow(u.id)}}>Follow</button>
                 }
               </div>
             </div>
@@ -43,8 +61,9 @@ const Users = props => {
           </div>
         );
       })}
+      <button className={st.nextBtn} onClick={() => this.addUsers(this.next())}>Show more</button>
     </div>
-  );
-};
+    )}
+}
 
 export default Users;

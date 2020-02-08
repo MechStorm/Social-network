@@ -1,31 +1,36 @@
 import React from "react";
 import st from "./NewMessage.module.css";
 
-const NewMessage = props => {
+class NewMessage extends React.Component{
+  constructor(props){
+    super(props);
+  }
 
-  let addMessage = () => {
-    if(props.dialogs.newMessageText === ''){
+  addMessage = () => {
+    if(this.props.dialogs.newMessageText === ''){
       alert('Enter a message');
       return;
     }
-    props.addMessage();
+    this.props.addMessage();
   };
 
-  let updateNewMessageText = (event) => {
+  updateNewMessageText = (event) => {
     let textVal = event.target.value;
-    props.updateNewMessageText(textVal);
+    this.props.updateNewMessageText(textVal);
   }
 
-  return (
-    <div className={st.newMessages}>
-      <div className={st.newMessage}>
-        <textarea onChange={updateNewMessageText} cols="70" rows="3" placeholder="Enter your message..." value={props.dialogs.newMessageText} />
+  render() {
+    return (
+      <div className={st.newMessages}>
+        <div className={st.newMessage}>
+          <textarea onChange={this.updateNewMessageText} cols="70" rows="3" placeholder="Enter your message..." value={this.props.dialogs.newMessageText} />
+        </div>
+        <div className={st.newMessageBtn}>
+          <button onClick={this.addMessage}>Add message</button>
+        </div>
       </div>
-      <div className={st.newMessageBtn}>
-        <button onClick={addMessage}>Add message</button>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default NewMessage;

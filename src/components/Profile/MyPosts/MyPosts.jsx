@@ -2,9 +2,6 @@ import React from "react";
 import st from "./MyPosts.module.css";
 
 class MyPosts extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   addPost = () => {
     if(this.props.posts.newPostText === '') {

@@ -2,9 +2,6 @@ import React from "react";
 import st from "./NewMessage.module.css";
 
 class NewMessage extends React.Component{
-  constructor(props){
-    super(props);
-  }
 
   addMessage = () => {
     if(this.props.dialogs.newMessageText === ''){

@@ -4,9 +4,6 @@ import { NavLink } from "react-router-dom";
 import Friends from "../FriendList/Friends";
 
 class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const friendList = this.props.sidebar.friendList.map(f => (

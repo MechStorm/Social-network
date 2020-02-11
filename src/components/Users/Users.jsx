@@ -7,31 +7,41 @@ class Users extends React.Component {
   constructor(props) {
     super(props);
 
-  axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-      this.props.setUsers(response.data.items);
-      });
+    let onPageChange = pageNumber => {
+      this.props.setCurrentPage(pageNumber);
 
-  let addUsers = (page) => {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`).then(response => {
-      this.props.setUsers(response.data.items);
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalCount(response.data.totalCount);
       });
-    } 
-
-  let nextPage = () => {
-    let page = 2;
-    
-    return () => {
-      return page++;
     }
-  }
   
-  this.addUsers = addUsers.bind(this);
-  this.next = nextPage().bind(this);
+  this.onPageChange = onPageChange.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+      this.props.setUsers(response.data.items);
+      this.props.setTotalCount(response.data.totalCount);
+      });
   }
  
   render() {
+    let totalPagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
+    let pages = [];
+    for(let i = 1; i<=totalPagesCount; i++) {
+      pages.push(i);
+    }
     return(
-    <div>      
+    <div>
+      <div className={st.numbers}>
+        {pages.map(p => {
+        return <span className={this.props.currentPage === p && st.activeNum}
+        onClick={() => this.onPageChange(p)}>{p}</span>
+        })}
+      </div>
+      
       {this.props.users.map(u => {
         return (
           <div key={u.id} className={st.usersPage}>
@@ -61,7 +71,6 @@ class Users extends React.Component {
           </div>
         );
       })}
-      <button className={st.nextBtn} onClick={() => this.addUsers(this.next())}>Show more</button>
     </div>
     )}
 }

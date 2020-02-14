@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const ADD_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const PROFILE_LOADING = "PROFILE-LOADING";
 
 let initialState = {
     postData: [
@@ -18,7 +19,8 @@ let initialState = {
         likeCount: 48
       }
     ],
-    newPostText: ""
+    newPostText: "",
+    profile: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -35,19 +37,23 @@ const profileReducer = (state = initialState, action) => {
         postData: [...state.postData, newPost],
         newPostText: ''
       }
-    case ADD_NEW_POST_TEXT: {
+    case ADD_NEW_POST_TEXT: 
       return {
         ...state,
         newPostText: action.textPost
       }
-    }
+    case PROFILE_LOADING:
+      return {
+        ...state,
+        profile: action.profile
+      }
     default:
       return state;
   };
 };
 
 export const addPostCreate = () => ({ type: ADD_POST });
-
 export const updateNewPostCreate = text => ({ type: ADD_NEW_POST_TEXT, textPost: text });
+export const profileLoading = profile => ({ type: PROFILE_LOADING, profile });
 
 export default profileReducer;

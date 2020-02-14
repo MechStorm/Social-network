@@ -3,10 +3,11 @@ import st from './Profile.module.css';
 import InfoBlock from './InfoBlock/InfoBlock';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
-const Profile = () =>{
+const Profile = props =>{
+  debugger;
   return ( 
     <div className={st.profilePage}>
-    <InfoBlock />
+    <InfoBlock profile={props.profile}/>
     <MyPostsContainer />
     </div>
     );

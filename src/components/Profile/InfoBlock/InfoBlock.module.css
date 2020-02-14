@@ -6,4 +6,13 @@
     margin-top: 15px;
     color: orange;
     font-size: 24px;
+    margin-left: 15px;
+}
+
+ul{
+    padding: 0;
+}
+
+ul>li{
+    list-style: none;
 }

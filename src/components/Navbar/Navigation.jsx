@@ -3,10 +3,8 @@ import st from "./Navigation.module.css";
 import { NavLink } from "react-router-dom";
 import Friends from "../FriendList/Friends";
 
-class Navigation extends React.Component {
-
-  render() {
-    const friendList = this.props.sidebar.friendList.map(f => (
+const Navigation = props => {
+    const friendList = props.sidebar.friendList.map(f => (
     <Friends name={f.name} key={f.id} img={f.img} id={f.id} lastName={f.lastName} />
   ));
   return (
@@ -49,7 +47,6 @@ class Navigation extends React.Component {
       </div>
     </nav>
   );
-  }
 }
 
 export default Navigation;

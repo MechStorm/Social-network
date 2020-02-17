@@ -1,8 +1,28 @@
 .header {
   grid-area: h;
-  background-color: rgb(218, 233, 13);
+  background-color: rgba(192, 243, 7, 0.61);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header img {
+.headerLogo img {
   width: 80px;
+}
+
+.authField{
+  margin-right: 100px;
+}
+
+.authField a{
+  text-decoration: none;
+}
+
+.authField a:hover{
+  color: rgb(255, 102, 0);
+}
+
+.userAva img{
+  width: 50px;
+  border-radius: 50%;
 }

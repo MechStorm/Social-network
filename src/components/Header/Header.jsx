@@ -20,7 +20,8 @@ const Header = props => {
           <div className={st.userAva}><img src={props.userProfile.photos.small != null ? props.userProfile.photos.small : userPhoto} alt="ava"/></div>
           <div>{'Hello, ' + props.login}</div>
         </div> 
-          : <NavLink to="/login">Login</NavLink>}
+          : <NavLink to="/login">Login</NavLink>
+          }
       </div>
     </header>
   );

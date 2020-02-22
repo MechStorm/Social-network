@@ -2,7 +2,6 @@ import React from "react";
 import st from "./Users.module.css";
 import standartImg from "../../assets/userphoto.png";
 import { NavLink } from "react-router-dom";
-import { userAPI } from "../../api/api";
 
 const Users = props => {
   let totalPagesCount = Math.ceil( props.totalCount / props.pageSize );
@@ -29,27 +28,12 @@ const Users = props => {
                 </NavLink>
               </div>
               <div className={st.followBtn}>
-                {u.follow
-                ? 
-                <button disabled={props.isProcess.some(id => id === u.id)} onClick={() => {
-                props.toggleIsProcess(true, u.id);
-                userAPI.unfollow(u.id).then(data => {        
-                  if(data.resultCode === 0 ) {
-                    props.unfollow(u.id)
-                  }
-                  props.toggleIsProcess(false, u.id);   
-                })   
-                }}>Unfollow</button>
+                {u.follow ? 
+                <button disabled={props.isProcess.some(id => id === u.id)} 
+                onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
                  : 
-                 <button disabled={props.isProcess.some(id => id === u.id)} onClick={() => {
-                props.toggleIsProcess(true, u.id);
-                   userAPI.follow(u.id).then(data => {
-                     if(data.resultCode === 0) {
-                       props.follow(u.id);
-                     }
-                     props.toggleIsProcess(false, u.id);
-                   })
-                   }}>Follow</button>
+                 <button disabled={props.isProcess.some(id => id === u.id)} 
+                onClick={() => { props.follow(u.id) }}>Follow</button>
                 }
               </div>
             </div>

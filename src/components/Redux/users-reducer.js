@@ -1,3 +1,5 @@
+import { userAPI } from "../../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
@@ -76,5 +78,51 @@ export const setTotalCount = totalCount => ({ type: SET_TOTAL_COUNT, totalCount 
 export const setCurrentPage = currentPage => ({ type: SET_PAGE, currentPage });
 export const toggleIsFetching = isFetching => ({ type: TOGGLE_ISFETCHING, isFetching });
 export const toggleIsProcess = (isFetching, userID) => ({ type: TOGGLE_IS_PROCESS, isFetching, userID });
+
+
+export const getUsersTC = (pageNumber, pageSize) => {
+  return dispatch => {
+    dispatch(setCurrentPage(pageNumber));
+      dispatch(toggleIsFetching(true));
+      userAPI.getUsers(pageNumber, pageSize)
+      .then(data => {
+          dispatch(toggleIsFetching(false));
+          dispatch(setUsers(data.items));
+          dispatch(setTotalCount(data.totalCount));
+      })
+  };
+};
+
+export const unfollowing = (userID) => {
+  return dispatch => {
+    dispatch(toggleIsProcess(true, userID));
+                userAPI.unfollow(userID).then(data => {        
+                  if(data.resultCode === 0 ) {
+                    dispatch(unfollow(userID));
+                  }
+                  dispatch(toggleIsProcess(false, userID));
+                  
+                  userAPI.getProfile(userID).then(data => {
+                    setTimeout(()=> alert('you are unfollowing on ' + data.fullName), 0)
+                    })
+                }) 
+  };
+};
+
+export const following = (userID) => {
+  return dispatch => {
+    dispatch(toggleIsProcess(true, userID));
+                userAPI.follow(userID).then(data => {        
+                  if(data.resultCode === 0 ) {
+                    dispatch(follow(userID));
+                  }
+                  dispatch(toggleIsProcess(false, userID));
+                  
+                  userAPI.getProfile(userID).then(data => {
+                  setTimeout(()=> alert('you are following on ' + data.fullName), 0)
+                  })
+                })
+  };
+};
 
 export default usersReducer;

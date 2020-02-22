@@ -1,3 +1,5 @@
+import { userAPI } from "../../api/api";
+
 const ADD_POST = "ADD-POST";
 const ADD_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const PROFILE_LOADING = "PROFILE-LOADING";
@@ -52,8 +54,17 @@ const profileReducer = (state = initialState, action) => {
   };
 };
 
-export const addPostCreate = () => ({ type: ADD_POST });
-export const updateNewPostCreate = text => ({ type: ADD_NEW_POST_TEXT, textPost: text });
+export const addPost = () => ({ type: ADD_POST });
+export const updateNewPostText = text => ({ type: ADD_NEW_POST_TEXT, textPost: text });
 export const profileLoading = profile => ({ type: PROFILE_LOADING, profile });
+
+
+export const getProfile = userID => {
+  return dispatch => {
+    userAPI.getProfile(userID).then(data => {
+      dispatch(profileLoading(data));
+  })
+  };
+};
 
 export default profileReducer;

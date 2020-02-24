@@ -9,7 +9,7 @@ const Users = props => {
   for (let i = 1; i <= totalPagesCount; i++) {
     pages.push(i);
   }
-  
+
   return (
     <div>
       <div className={st.numbers}>
@@ -27,7 +27,7 @@ const Users = props => {
                   <img src={u.photos.small != null ? u.photos.small : standartImg} alt={"user"} />
                 </NavLink>
               </div>
-              <div className={!props.isAuth && st.followBtn}>
+              <div className={st.followBtn}>
                 {u.follow ? 
                 <button className={st.followingBtn} disabled={props.isProcess.some(id => id === u.id)} 
                 onClick={() => { props.unfollow(u.id) }}>Unfollow</button>

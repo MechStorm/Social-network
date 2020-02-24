@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Users from "./Users";
 import { getUsersTC, following, unfollowing } from "../Redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
+import { withAuthRedirect } from "../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
   constructor(props) {
@@ -32,7 +33,6 @@ class UsersContainer extends React.Component {
         follow={this.props.following}
         users={this.props.users}
         isProcess={this.props.isProcess}
-        isAuth={this.props.isAuth}
       />
       </>
     );
@@ -47,8 +47,7 @@ const mapStateToProps = state => {
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
     isProcess: state.usersPage.toggleIsFollowingProcess,
-    isAuth: state.userAuth.isAuth
   };
 };
 
-export default connect(mapStateToProps, { following, unfollowing, getUsersTC })(UsersContainer);
+export default withAuthRedirect(connect(mapStateToProps, { following, unfollowing, getUsersTC })(UsersContainer));

@@ -9,6 +9,7 @@ import NavigationContainer from "./components/Navbar/NavigationContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./components/Login/Login";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route exact path="/music" component={Music} />
           <Route exact path="/settings" component={Settings} />
           <Route exact path="/users" render={()=><UsersContainer />} />
+          <Route exact path="/login" render={()=><LoginPage />} />
         </div>
       </div>
   );

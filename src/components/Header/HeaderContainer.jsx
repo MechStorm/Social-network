@@ -9,7 +9,7 @@ class HeaderContainer extends React.Component {
   }
 
   render() {
-    return <Header {...this.props} userProfile={this.props.userProfile}/>;
+    return <Header {...this.props} />;
   }
 }
 

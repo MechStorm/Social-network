@@ -15,7 +15,7 @@ let updateNewMessageText = (event) => {
     let textVal = event.target.value;
     props.updateNewMessageText(textVal);
   }
-
+  
     return (
       <div className={st.newMessages}>
         <div className={st.newMessage}>

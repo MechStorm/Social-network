@@ -9,6 +9,10 @@
     margin-left: 15px;
 }
 
+.description img{
+    width: 300px;
+}
+
 ul{
     padding: 0;
 }

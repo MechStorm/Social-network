@@ -16,7 +16,7 @@ class UsersContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUsersTC(this.props.pageNumber, this.props.pageSize);
+    this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
   }
 
   render() {
@@ -32,6 +32,7 @@ class UsersContainer extends React.Component {
         follow={this.props.following}
         users={this.props.users}
         isProcess={this.props.isProcess}
+        isAuth={this.props.isAuth}
       />
       </>
     );
@@ -45,7 +46,8 @@ const mapStateToProps = state => {
     totalCount: state.usersPage.totalCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
-    isProcess: state.usersPage.toggleIsFollowingProcess
+    isProcess: state.usersPage.toggleIsFollowingProcess,
+    isAuth: state.userAuth.isAuth
   };
 };
 

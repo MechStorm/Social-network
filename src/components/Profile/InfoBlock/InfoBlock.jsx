@@ -1,6 +1,7 @@
 import React from "react";
 import st from "./InfoBlock.module.css";
 import Preloader from "../../common/Preloader/Preloader";
+import profileImg from '../../../assets/userProfile.png';
 
 const InfoBlock = props => {
   if (!props.profile) {
@@ -18,7 +19,7 @@ const InfoBlock = props => {
         />
       </div>
       <div className={st.description}>
-        <img src={props.profile.photos.large} alt="profileImg" />
+        <img src={props.profile.photos.large != null ? props.profile.photos.large : profileImg} alt="profileImg" />
         <div className={st.about}>
           about: {props.profile.aboutMe}
         </div>

@@ -12,9 +12,10 @@
 
 .followBtn {
     margin-bottom: 15px;
+    display: none;
 }
 
-.followBtn button {
+.followingBtn {
     width: 75px;
 }
 
@@ -48,3 +49,4 @@
     color: blue;
     font-weight: 700;
 }
+

@@ -27,12 +27,12 @@ const Users = props => {
                   <img src={u.photos.small != null ? u.photos.small : standartImg} alt={"user"} />
                 </NavLink>
               </div>
-              <div className={st.followBtn}>
+              <div className={!props.isAuth && st.followBtn}>
                 {u.follow ? 
-                <button disabled={props.isProcess.some(id => id === u.id)} 
+                <button className={st.followingBtn} disabled={props.isProcess.some(id => id === u.id)} 
                 onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
                  : 
-                 <button disabled={props.isProcess.some(id => id === u.id)} 
+                 <button className={st.followingBtn} disabled={props.isProcess.some(id => id === u.id)} 
                 onClick={() => { props.follow(u.id) }}>Follow</button>
                 }
               </div>

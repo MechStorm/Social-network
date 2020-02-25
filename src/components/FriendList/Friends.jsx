@@ -1,5 +1,6 @@
 import React from "react";
 import st from "./Friends.module.css";
+import { withAuthRedirect } from "../hoc/withAuthRedirect";
 
 const Friends = props => {
   return (
@@ -16,4 +17,4 @@ const Friends = props => {
   );
 };
 
-export default Friends;
+export default withAuthRedirect(Friends);

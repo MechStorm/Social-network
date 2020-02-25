@@ -2,6 +2,7 @@ import React from "react";
 import st from "./InfoBlock.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import profileImg from '../../../assets/userProfile.png';
+import ProfileStatus from "./ProfileStatus";
 
 const InfoBlock = props => {
   if (!props.profile) {
@@ -12,17 +13,16 @@ const InfoBlock = props => {
 
   return (
     <div>
-      <div className={st.infoImg}>
+      {/* <div className={st.infoImg}>
         <img
           src="https://2.bp.blogspot.com/-pjNTgmD8aqo/XQAJpkScAYI/AAAAAAAAHEQ/WxRLvWmK_qQnljRCVBsKF23zuKQhdlMrACKgBGAs/w3840-h1600-p-k-no-nu/star-wars-jedi-fallen-order-uhdpaper.com-4K-23.jpg"
           alt="infoBlock pict"
         />
-      </div>
+      </div> */}
+      
       <div className={st.description}>
         <img src={props.profile.photos.large != null ? props.profile.photos.large : profileImg} alt="profileImg" />
-        <div className={st.about}>
-          about: {props.profile.aboutMe}
-        </div>
+          <ProfileStatus className={st.about} status={props.profile.aboutMe} />
         <div className={st.contacts}>
           <ul>Contacts:
             <li>facebook: {contacts.facebook ? contacts.facebook : 'not yet'}</li>

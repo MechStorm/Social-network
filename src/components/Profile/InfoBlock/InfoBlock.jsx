@@ -22,7 +22,7 @@ const InfoBlock = props => {
       
       <div className={st.description}>
         <img src={props.profile.photos.large != null ? props.profile.photos.large : profileImg} alt="profileImg" />
-          <ProfileStatus className={st.about} status={props.profile.aboutMe} />
+          <ProfileStatus className={st.about} status={props.status} updateStatus={props.updateStatus} />
         <div className={st.contacts}>
           <ul>Contacts:
             <li>facebook: {contacts.facebook ? contacts.facebook : 'not yet'}</li>

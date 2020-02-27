@@ -14,8 +14,8 @@ export const userAPI = {
         .then(response => response.data);
     },
     getProfile(id){
-        return instance.get(`profile/${id}`)
-        .then(response => response.data);
+        console.warn('this api need to update! ');
+        return profileApi.getProfile(id);
     },
     follow(id){
         return instance.post(`follow/${id}`, {})
@@ -23,6 +23,21 @@ export const userAPI = {
     },
     unfollow(id){
         return instance.delete(`follow/${id}`)
+        .then(response => response.data);
+    }
+}
+
+export const profileApi = {
+    getProfile(id) {
+        return instance.get(`profile/${id}`)
+        .then(response => response.data);
+    },
+    getProfileStatus(id) {
+        return instance.get(`profile/status/${id}`)
+        .then(response => response.data);
+    },
+    updateProfileStatus(status){
+        return instance.put(`profile/status`, {status: status})
         .then(response => response.data);
     }
 }

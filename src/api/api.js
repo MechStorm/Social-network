@@ -13,10 +13,6 @@ export const userAPI = {
        return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
         .then(response => response.data);
     },
-    getProfile(id){
-        console.warn('this api need to update! ');
-        return profileApi.getProfile(id);
-    },
     follow(id){
         return instance.post(`follow/${id}`, {})
         .then(response => response.data);

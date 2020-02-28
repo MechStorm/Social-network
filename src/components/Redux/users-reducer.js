@@ -1,4 +1,4 @@
-import { userAPI } from "../../api/api";
+import { userAPI, profileApi } from "../../api/api";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -102,7 +102,7 @@ export const unfollowing = (userID) => {
                   }
                   dispatch(toggleIsProcess(false, userID));
                   
-                  userAPI.getProfile(userID).then(data => {
+                  profileApi.getProfile(userID).then(data => {
                     setTimeout(()=> alert('you are unfollowing on ' + data.fullName), 0)
                     })
                 }) 
@@ -118,7 +118,7 @@ export const following = (userID) => {
                   }
                   dispatch(toggleIsProcess(false, userID));
                   
-                  userAPI.getProfile(userID).then(data => {
+                  profileApi.getProfile(userID).then(data => {
                   setTimeout(()=> alert('you are following on ' + data.fullName), 0)
                   })
                 })

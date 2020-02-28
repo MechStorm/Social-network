@@ -1,4 +1,4 @@
-import { userAPI, authAPI } from "../../api/api";
+import { authAPI, profileApi } from "../../api/api";
 
 const SET_USER_AUTH = "SET_USER_AUTH";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
@@ -7,7 +7,7 @@ let initialState = {
     id: null,
     login: null,
     email: null,
-    isAuth: false,
+    isAuth: true,
     userProfile: null
 };
 
@@ -40,7 +40,7 @@ return dispatch => {
           let { id, login, email } = data.data;
           dispatch(setUserAuth(id, login, email));
           
-          userAPI.getProfile(id).then(data => {
+          profileApi.getProfile(id).then(data => {
             dispatch(setUserProfile(data));
           });
         }

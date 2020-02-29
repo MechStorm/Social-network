@@ -1,7 +1,6 @@
 import { profileApi } from "../../api/api";
 
 const ADD_POST = "ADD-POST";
-const ADD_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const PROFILE_LOADING = "PROFILE-LOADING";
 const SET_STATUS = "SET-STATUS";
 
@@ -22,7 +21,6 @@ let initialState = {
         likeCount: 48
       }
     ],
-    newPostText: "",
     profile: null,
     status: ""
 };
@@ -32,19 +30,13 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST: 
       let newPost = {
         id: 5,
-        message: state.newPostText,
+        message: action.textPost,
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjQ0RVqfW3wEqPrR9qzGfBdNtMPcLvPaZxjqJYaOYVGnh5ndJE&s",
         likeCount: 0
       };
       return {
         ...state,
         postData: [...state.postData, newPost],
-        newPostText: ''
-      }
-    case ADD_NEW_POST_TEXT: 
-      return {
-        ...state,
-        newPostText: action.textPost
       }
     case PROFILE_LOADING:
       return {
@@ -61,8 +53,7 @@ const profileReducer = (state = initialState, action) => {
   };
 };
 
-export const addPost = () => ({ type: ADD_POST });
-export const updateNewPostText = text => ({ type: ADD_NEW_POST_TEXT, textPost: text });
+export const addPost = (textPost) => ({ type: ADD_POST, textPost });
 export const profileLoading = profile => ({ type: PROFILE_LOADING, profile });
 export const setStatus = status => ({ type: SET_STATUS, status});
 

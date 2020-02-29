@@ -1,5 +1,4 @@
 const ADD_MESSAGES = "ADD-MESSAGES";
-const ADD_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 let initialState = {
   dialogsData: [
@@ -79,8 +78,7 @@ let initialState = {
       message: "And how are you?",
       id: 1
     }
-  ],
-  newMessageText: ""
+  ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -91,19 +89,12 @@ const dialogsReducer = (state = initialState, action) => {
         lastName: "Roberts",
         img:
           "http://thumbs.dfs.ivi.ru/storage15/contents/0/e/978fd73456fbcf41a616b4ae8bc8a7.jpg",
-        message: state.newMessageText,
+        message: action.newMessageText,
         id: 2
       };
       return {
         ...state,
-        messagesData: [...state.messagesData, newMessage],
-        newMessageText: ''
-      }
-    }
-    case ADD_NEW_MESSAGE_TEXT:{
-      return {
-        ...state,
-        newMessageText: action.textMessage
+        messagesData: [...state.messagesData, newMessage]
       }
     }
     default:
@@ -111,8 +102,6 @@ const dialogsReducer = (state = initialState, action) => {
   }
 };
 
-export const addMessage = () => ({ type: ADD_MESSAGES});
-
-export const updateNewMessage = text => ({ type: ADD_NEW_MESSAGE_TEXT, textMessage: text});
+export const addMessage = (newMessageText) => ({ type: ADD_MESSAGES, newMessageText});
 
 export default dialogsReducer;

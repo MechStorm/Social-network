@@ -1,29 +1,20 @@
 import React from "react";
 import st from "./NewMessage.module.css";
+import NewMessageForm from "./NewMessageForm";
 
 const NewMessage = props => {
 
-let addMessage = () => {
-    if(props.dialogs.newMessageText === ''){
-      alert('Enter a message');
-      return;
+  let sendMessage = values => {
+    if(!values.newMessage) {
+        alert('Enter some text');
+        return;
     }
-    props.addMessage();
-  };
-
-let updateNewMessageText = (event) => {
-    let textVal = event.target.value;
-    props.updateNewMessageText(textVal);
+    props.addMessage(values.newMessage);
   }
   
     return (
       <div className={st.newMessages}>
-        <div className={st.newMessage}>
-          <textarea onChange={updateNewMessageText} cols="70" rows="3" placeholder="Enter your message..." value={props.dialogs.newMessageText} />
-        </div>
-        <div className={st.newMessageBtn}>
-          <button onClick={addMessage}>Add message</button>
-        </div>
+        <NewMessageForm onSubmit={sendMessage} />
       </div>
     );
 }

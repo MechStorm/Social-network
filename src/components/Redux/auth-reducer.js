@@ -1,4 +1,4 @@
-import { authAPI, profileApi } from "../../api/api";
+import {authAPI, profileApi} from "../../api/api";
 
 const SET_USER_AUTH = "SET_USER_AUTH";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
@@ -7,12 +7,12 @@ let initialState = {
     id: null,
     login: null,
     email: null,
-    isAuth: true,
+    isAuth: false,
     userProfile: null
 };
 
 const authReducer = (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case SET_USER_AUTH:
             return {
                 ...state,
@@ -34,18 +34,25 @@ export let setUserProfile = profile => ({type: SET_USER_PROFILE, profile});
 
 
 export const getAuth = () => {
-return dispatch => {
-    authAPI.getAuth().then(data => {
-        if (data.resultCode === 0) {
-          let { id, login, email } = data.data;
-          dispatch(setUserAuth(id, login, email));
-          
-          profileApi.getProfile(id).then(data => {
-            dispatch(setUserProfile(data));
-          });
-        }
-      });
+    return dispatch => {
+        authAPI.getAuth().then(data => {
+            if (data.resultCode === 0) {
+                let {id, login, email} = data.data;
+                dispatch(setUserAuth(id, login, email));
+
+                profileApi.getProfile(id).then(data => {
+                    dispatch(setUserProfile(data));
+                });
+            }
+        });
     };
+}
+
+export const userLogin = (login, pass, rememberMe) => dispatch => {
+    authAPI.userLogin(login, pass, rememberMe).then(data => {
+        debugger;
+            return data.data.userId = 5968;
+    })
 }
 
 export default authReducer;

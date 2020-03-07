@@ -5,10 +5,6 @@ import MyPostsForm from "./MyPostsForm";
 const MyPosts = props => {
 
     let sendNewPost = (values) => {
-        if (!values.textOfPost) {
-            alert('Enter something');
-            return;
-        }
         props.addPost(values.textOfPost);
     }
 

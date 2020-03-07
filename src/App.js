@@ -8,14 +8,14 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavigationContainer from "./components/Navbar/NavigationContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/LoginPage";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App = () => {
     return (
         <div className="wrapper">
             <NavigationContainer/>
-            <HeaderContainer/>
+            <HeaderContainer />
             <div className="wrapper-content">
                 <Route
                     path="/profile/:userID?"

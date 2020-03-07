@@ -5,10 +5,6 @@ import NewMessageForm from "./NewMessageForm";
 const NewMessage = props => {
 
   let sendMessage = values => {
-    if(!values.newMessage) {
-        alert('Enter some text');
-        return;
-    }
     props.addMessage(values.newMessage);
   }
   

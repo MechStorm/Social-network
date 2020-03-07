@@ -1,0 +1,7 @@
+.formControl.formErr textarea{
+    border: 2px solid red;
+}
+
+.errMsg{
+    color: red;
+}

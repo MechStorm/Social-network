@@ -16,8 +16,8 @@ const Header = props => {
                 {(props.isAuth && !!props.userProfile) ?
 
                     <div className={st.userLog}>
-                        <div className={st.userAva}><img
-                            src={props.userProfile.photos.small != null ? props.userProfile.photos.small : userPhoto}
+                        <div className={st.userAva}>
+                            <img src={props.userProfile.photos.small != null ? props.userProfile.photos.small : userPhoto}
                             alt="ava"/>
                         </div>
 

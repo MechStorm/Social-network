@@ -29,6 +29,6 @@ let mapStateToProps = state => {
         isAuth: state.userAuth.isAuth,
         id: state.userAuth.id
     }
-}
+};
 
 export default connect(mapStateToProps, {userLogin})(LoginPage);

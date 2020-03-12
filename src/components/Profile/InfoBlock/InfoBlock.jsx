@@ -3,6 +3,7 @@ import st from "./InfoBlock.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import profileImg from '../../../assets/userProfile.png';
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const InfoBlock = props => {
   if (!props.profile) {
@@ -22,7 +23,7 @@ const InfoBlock = props => {
       
       <div className={st.description}>
         <img src={props.profile.photos.large != null ? props.profile.photos.large : profileImg} alt="profileImg" />
-          <ProfileStatus className={st.about} status={props.status} updateStatus={props.updateStatus} />
+          <ProfileStatusWithHooks className={st.about} status={props.status} updateStatus={props.updateStatus} />
         <div className={st.contacts}>
           <ul>Contacts:
             <li>facebook: {contacts.facebook ? contacts.facebook : 'not yet'}</li>

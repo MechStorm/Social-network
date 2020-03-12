@@ -1,5 +1,4 @@
 import {getAuth} from "./auth-reducer";
-import {getProfile} from "./profile-reducer";
 
 const INITIALIZING = "INITIALIZING";
 

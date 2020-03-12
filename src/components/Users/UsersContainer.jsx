@@ -4,6 +4,15 @@ import Users from "./Users";
 import {following, getUsersTC, unfollowing} from "../Redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getIsAuth,
+    getIsFetching,
+    getPageSize,
+    getProcess,
+    getTotalCount,
+    getUsers
+} from "../Redux/users-selector";
 
 class UsersContainer extends React.Component {
     constructor(props) {
@@ -41,12 +50,13 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isProcess: state.usersPage.toggleIsFollowingProcess,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        currentPage:getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        isProcess: getProcess(state),
+        isAuth: getIsAuth(state)
     };
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 import st from "./MyPosts.module.css";
 import MyPostsForm from "./MyPostsForm";
 
-const MyPosts = props => {
+const MyPosts = React.memo(props => {
 
     let sendNewPost = (values) => {
         props.addPost(values.textOfPost);
@@ -20,6 +20,6 @@ const MyPosts = props => {
             {props.post}
         </div>
     );
-}
+});
 
 export default MyPosts;

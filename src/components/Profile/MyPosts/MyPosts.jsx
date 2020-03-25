@@ -2,10 +2,10 @@ import React from "react";
 import st from "./MyPosts.module.css";
 import MyPostsForm from "./MyPostsForm";
 
-const MyPosts = React.memo(props => {
+const MyPosts = React.memo(({addPost, post}) => {
 
     let sendNewPost = (values) => {
-        props.addPost(values.textOfPost);
+        addPost(values.textOfPost);
     }
 
     return (
@@ -17,7 +17,7 @@ const MyPosts = React.memo(props => {
                     <MyPostsForm onSubmit={sendNewPost}/>
                 </div>
             </div>
-            {props.post}
+            {post}
         </div>
     );
 });

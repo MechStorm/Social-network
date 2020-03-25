@@ -2,28 +2,20 @@ import React from "react";
 import st from "./InfoBlock.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import profileImg from '../../../assets/userProfile.png';
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const InfoBlock = props => {
-  if (!props.profile) {
+const InfoBlock = ({profile, status, updateStatus}) => {
+  if (!profile) {
     return <Preloader />;
   }
 
-  let contacts = props.profile.contacts;
+  let contacts = profile.contacts;
 
   return (
     <div>
-      {/* <div className={st.infoImg}>
-        <img
-          src="https://2.bp.blogspot.com/-pjNTgmD8aqo/XQAJpkScAYI/AAAAAAAAHEQ/WxRLvWmK_qQnljRCVBsKF23zuKQhdlMrACKgBGAs/w3840-h1600-p-k-no-nu/star-wars-jedi-fallen-order-uhdpaper.com-4K-23.jpg"
-          alt="infoBlock pict"
-        />
-      </div> */}
-      
       <div className={st.description}>
-        <img src={props.profile.photos.large != null ? props.profile.photos.large : profileImg} alt="profileImg" />
-          <ProfileStatusWithHooks className={st.about} status={props.status} updateStatus={props.updateStatus} />
+        <img src={profile.photos.large != null ? profile.photos.large : profileImg} alt="profileImg" />
+          <ProfileStatusWithHooks className={st.about} status={status} updateStatus={updateStatus} />
         <div className={st.contacts}>
           <ul>Contacts:
             <li>facebook: {contacts.facebook ? contacts.facebook : 'not yet'}</li>
@@ -36,10 +28,10 @@ const InfoBlock = props => {
             <li>mainlink: {contacts.mainlink ? contacts.mainlink : 'not yet'}</li>
           </ul>
         </div>
-        <p>looking for a job: {props.profile.lookingForAJob ? ':)' : ':('}</p>
-        <p>looking for a job description: {props.profile.lookingForAJobDescription ? props.profile.lookingForAJobDescription : 'not data'}</p>
-        <p>fullname: {props.profile.fullName ? props.profile.fullName : 'not data'}</p>
-        <p>UserID: {props.profile.userId ? props.profile.userId : 'not data'}</p>
+        <p>looking for a job: {profile.lookingForAJob ? ':)' : ':('}</p>
+        <p>looking for a job description: {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : 'not data'}</p>
+        <p>fullname: {profile.fullName ? profile.fullName : 'not data'}</p>
+        <p>UserID: {profile.userId ? profile.userId : 'not data'}</p>
       </div>
     </div>
   );

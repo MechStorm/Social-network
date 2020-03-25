@@ -8,6 +8,7 @@ import {compose} from 'redux';
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
+        let {getProfile, getProfileStatus} = this.props;
         let userID = this.props.match.params.userID;
         debugger;
         if (!userID) {
@@ -21,8 +22,8 @@ class ProfileContainer extends React.Component {
             this.props.history.push(`/profile/${userID}`);
         }
 
-        this.props.getProfile(userID);
-        this.props.getProfileStatus(userID);
+        getProfile(userID);
+        getProfileStatus(userID);
     }
 
     render() {

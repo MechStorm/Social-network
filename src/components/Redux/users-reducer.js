@@ -1,12 +1,13 @@
 import {profileApi, userAPI} from "../../api/api";
+import {followingUnfollowing} from "../utils/objectHelper";
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET-USERS";
-const SET_TOTAL_COUNT = "SET-TOTAL-COUNT";
-const SET_PAGE = "SET-PAGE";
-const TOGGLE_ISFETCHING = "TOGGLE-ISFETCHING";
-const TOGGLE_IS_PROCESS = "TOGGLE-IS-PROCESS";
+const FOLLOW = "social-network/users/FOLLOW";
+const UNFOLLOW = "social-network/users/UNFOLLOW";
+const SET_USERS = "social-network/users/SET-USERS";
+const SET_TOTAL_COUNT = "social-network/users/SET-TOTAL-COUNT";
+const SET_PAGE = "social-network/users/SET-PAGE";
+const TOGGLE_ISFETCHING = "social-network/users/TOGGLE-ISFETCHING";
+const TOGGLE_IS_PROCESS = "social-network/users/TOGGLE-IS-PROCESS";
 
 let initialState = {
     users: [],
@@ -22,22 +23,12 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: [...state.users].map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: true};
-                    }
-                    return u;
-                })
+                users: followingUnfollowing(state.users, "id", action.userId, {followed:true})
             };
         case UNFOLLOW:
             return {
                 ...state,
-                users: [...state.users].map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false};
-                    }
-                    return u;
-                })
+                users: followingUnfollowing(state.users, "id", action.userId, {followed:false})
             };
         case SET_USERS:
             return {
@@ -65,7 +56,7 @@ const usersReducer = (state = initialState, action) => {
                 toggleIsFollowingProcess: action.isFetching ?
                     [...state.toggleIsFollowingProcess, action.userID]
                     : state.toggleIsFollowingProcess.filter(id => id !== action.userID)
-            }
+            };
         default:
             return state;
     }
@@ -80,43 +71,32 @@ export const toggleIsFetching = isFetching => ({type: TOGGLE_ISFETCHING, isFetch
 export const toggleIsProcess = (isFetching, userID) => ({type: TOGGLE_IS_PROCESS, isFetching, userID});
 
 
-export const getUsersTC = (page, pageSize) => dispatch => {
+export const getUsersTC = (page, pageSize) => async dispatch => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(page));
-    userAPI.getUsers(page, pageSize)
-        .then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(data.items));
-            dispatch(setTotalCount(data.totalCount));
-        })
+    let data = await userAPI.getUsers(page, pageSize);
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalCount(data.totalCount));
 };
 
-export const unfollowing = (userID) => dispatch => {
+const followUnfollowFlow = async (dispatch, userID, apiMethod, op, message) => {
     dispatch(toggleIsProcess(true, userID));
-    userAPI.unfollow(userID).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(unfollow(userID));
-        }
-        dispatch(toggleIsProcess(false, userID));
-
-        profileApi.getProfile(userID).then(data => {
-            setTimeout(() => alert('you are unfollowing on ' + data.fullName), 0)
-        })
-    })
+    let data = await apiMethod(userID);
+    if (data.resultCode === 0) {
+        dispatch(op(userID));
+    }
+    dispatch(toggleIsProcess(false, userID));
+    let profileData = await profileApi.getProfile(userID);
+    setTimeout(() => alert(`you are ${message} on ${profileData.fullName}`), 0);
 };
 
-export const following = (userID) => dispatch => {
-    dispatch(toggleIsProcess(true, userID));
-    userAPI.follow(userID).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(follow(userID));
-        }
-        dispatch(toggleIsProcess(false, userID));
+export const unfollowing = (userID) => async dispatch => {
+    followUnfollowFlow(dispatch, userID, userAPI.unfollow.bind(userAPI), unfollow, 'unfollowing');
+};
 
-        profileApi.getProfile(userID).then(data => {
-            setTimeout(() => alert('you are following on ' + data.fullName), 0)
-        })
-    })
+export const following = (userID) => async dispatch => {
+    followUnfollowFlow(dispatch, userID, userAPI.follow.bind(userAPI), follow, 'following');
 };
 
 export default usersReducer;

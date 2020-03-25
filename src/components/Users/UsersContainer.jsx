@@ -26,22 +26,24 @@ class UsersContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
+        let {getUsersTC, currentPage, pageSize} = this.props;
+        getUsersTC(currentPage, pageSize);
     }
 
     render() {
+        let {isFetching, totalCount, pageSize, currentPage, unfollowing, following, users, isProcess} = this.props;
         return (
             <>
-                {this.props.isFetching ? <Preloader/> : null}
+                {isFetching ? <Preloader/> : null}
                 <Users
-                    totalCount={this.props.totalCount}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
+                    totalCount={totalCount}
+                    pageSize={pageSize}
+                    currentPage={currentPage}
                     onPageChange={this.onPageChange}
-                    unfollow={this.props.unfollowing}
-                    follow={this.props.following}
-                    users={this.props.users}
-                    isProcess={this.props.isProcess}
+                    unfollow={unfollowing}
+                    follow={following}
+                    users={users}
+                    isProcess={isProcess}
                 />
             </>
         );

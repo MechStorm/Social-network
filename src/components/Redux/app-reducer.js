@@ -1,6 +1,6 @@
 import {getAuth} from "./auth-reducer";
 
-const INITIALIZING = "INITIALIZING";
+const INITIALIZING = "social-network/app/INITIALIZING";
 
 let initialState = {
     initializing: false

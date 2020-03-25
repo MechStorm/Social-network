@@ -8,9 +8,7 @@ const mapStateToProps = state => {
   return {
     post: [...state.profilePage.postData]
         .reverse()
-        .map(p => (
-      <Post message={p.message} key={p.id} img={p.img} likeCount={p.likeCount} />
-    )),
+        .map(p => (<Post message={p.message} key={p.id} img={p.img} likeCount={p.likeCount} />)),
     posts: state.profilePage
   }
 };

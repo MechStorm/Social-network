@@ -1,7 +1,6 @@
-const ADD_MESSAGES = "social-network/dialogs/ADD-MESSAGES";
-const ADD_DIALOG = "social-network/dialogs/ADD_DIALOG";
+import dialogsReducer, {addMessage, newDialog} from "./dialogs-reducer";
 
-let initialState = {
+let state = {
   dialogsData: [
     {
       name: "Maria",
@@ -82,40 +81,14 @@ let initialState = {
   ]
 };
 
-const dialogsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_MESSAGES: {
-      let newMessage = {
-        name: "Emma",
-        lastName: "Roberts",
-        img:
-            "http://thumbs.dfs.ivi.ru/storage15/contents/0/e/978fd73456fbcf41a616b4ae8bc8a7.jpg",
-        message: action.newMessageText,
-        id: 2
-      };
-      return {
-        ...state,
-        messagesData: [...state.messagesData, newMessage]
-      }
-    }
-    case ADD_DIALOG:
-          let createDialog = {
-            name: "Maria",
-            lastName: "Stone",
-            id: 5,
-            img:
-                "https://img.cinemablend.com/filter:scale/quill/0/b/a/8/b/5/0ba8b5b1f1f8fac9a80ac2bb03dc56460cfe119d.jpg?mw=600"
-          };
-          return {
-          ...state,
-          dialogsData: [...state.dialogsData, createDialog]
-        }
-    default:
-      return state;
-  }
-};
+it('correct adding message', () => {
+  let action = addMessage('Some Text');
+  let newState = dialogsReducer(state, action);
+  expect(newState.messagesData.length).toBe(5);
+});
 
-export const addMessage = (newMessageText) => ({ type: ADD_MESSAGES, newMessageText});
-export const newDialog = () => ({type: ADD_DIALOG});
-
-export default dialogsReducer;
+it('correct adding new dialogs', () => {
+  let action = newDialog();
+  let newState = dialogsReducer(state, action);
+  expect(newState.dialogsData.length).toBe(7);
+});

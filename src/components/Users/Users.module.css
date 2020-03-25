@@ -34,18 +34,3 @@
     border: 3px solid white;
     padding: 0 5rem;
 }
-
-.numbers {
-    color: #fff;
-    cursor: pointer;
-}
-
-.numbers>span:hover {
-    color: gold;
-}
-
-.activeNum {
-    color: blue;
-    font-weight: 700;
-}
-

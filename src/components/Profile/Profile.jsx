@@ -3,10 +3,10 @@ import st from './Profile.module.css';
 import InfoBlock from './InfoBlock/InfoBlock';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
-const Profile = props =>{
+const Profile = ({profile, status, updateProfileStatus}) =>{
   return ( 
     <div className={st.profilePage}>
-    <InfoBlock profile={props.profile} status={props.status} updateStatus={props.updateProfileStatus} />
+    <InfoBlock profile={profile} status={status} updateStatus={updateProfileStatus} />
     <MyPostsContainer />
     </div>
     );

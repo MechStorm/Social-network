@@ -1,61 +1,12 @@
 import React from "react";
-import st from "./Users.module.css";
-import standartImg from "../../assets/userProfile.png";
-import {NavLink} from "react-router-dom";
+import User from "./User";
+import Pagination from "../common/Pagination/Pagination";
 
-const Users = props => {
-    let totalPagesCount = Math.ceil(props.totalCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= totalPagesCount; i++) {
-        pages.push(i);
-    }
-
+const Users = ({totalCount, pageSize, currentPage, onPageChange, isProcess, follow, unfollow, users}) => {
     return (
         <div>
-            <div className={st.numbers}>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p && st.activeNum}
-                                 onClick={() => props.onPageChange(p)}>{p}</span>
-                })
-                }
-            </div>
-            {props.users.map(u => {
-                return <div key={u.id} className={st.usersPage}>
-                    <div className={st.iconAndStatus}>
-                        <div>
-                            <NavLink to={"/profile/" + u.id}>
-                                <img src={u.photos.small != null ? u.photos.small : standartImg} alt={"user"}/>
-                            </NavLink>
-                        </div>
-
-                        <div className={st.followBtn}>
-                            {u.followed ?
-                                <button className={st.followingBtn} disabled={props.isProcess.some(id => id === u.id)}
-                                        onClick={() => {
-                                            props.unfollow(u.id)
-                                        }}>Unfollow</button>
-                                :
-                                <button className={st.followingBtn} disabled={props.isProcess.some(id => id === u.id)}
-                                        onClick={() => {
-                                            props.follow(u.id)
-                                        }}>Follow</button>
-                            }
-                        </div>
-
-                    </div>
-                    <div className={st.userStatus}>
-                        <div>
-                            <p>{u.name}</p>
-                            <p>{u.status}</p>
-                        </div>
-
-                        <div className={st.userLocation}>
-                            <div>{"u.location.country"}</div>
-                            <div>{"u.location.city"}</div>
-                        </div>
-                    </div>
-                </div>
-            })}
+            <Pagination totalCount={totalCount} pageSize={pageSize} currentPage={currentPage} onPageChange={onPageChange} />
+            {users.map(u => <User users={u} key={u.id} isProcess={isProcess} follow={follow} unfollow={unfollow}/>)}
         </div>
     );
 };

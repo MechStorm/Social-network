@@ -1,5 +1,5 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
 import {maxLengthValidation, required} from "../../utils/validation";
 import {createField, FieldRequiredForm} from "../../utils/FieldLevelValidationForm";
 

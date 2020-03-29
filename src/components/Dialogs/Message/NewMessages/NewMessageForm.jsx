@@ -1,5 +1,5 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
 import {maxLengthValidation, required} from "../../../utils/validation";
 import {createField, FieldRequiredForm} from "../../../utils/FieldLevelValidationForm";
 
@@ -9,7 +9,7 @@ const Textarea = FieldRequiredForm("textarea");
 const NewMessageForm = props => {
     return (
         <form onSubmit={props.handleSubmit}>
-            {createField(null, "newMessage", "Enter your message...", Textarea, {type: "input"}
+            {createField(null, "newMessage", "Enter your message...", Textarea, {type: "input"},
                 [required, maxLength100])}
             <button>Add message</button>
         </form>

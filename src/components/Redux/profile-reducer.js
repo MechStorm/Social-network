@@ -38,26 +38,25 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postData: [...state.postData, newPost],
-            }
+            };
         case PROFILE_LOADING:
             return {
                 ...state,
                 profile: action.profile
-            }
+            };
         case SET_STATUS:
             return {
                 ...state,
                 status: action.status
-            }
+            };
         case DELETE_POST:
             return {
                 ...state,
-                postData: state.postData.filter(p => p.id != action.postID)
-            }
+                postData: state.postData.filter(p => p.id !== action.postID)
+            };
         default:
             return state;
     }
-    ;
 };
 
 export const addPost = (textPost) => ({type: ADD_POST, textPost});
@@ -79,7 +78,7 @@ export const updateProfileStatus = status => async dispatch => {
     let data = await profileApi.updateProfileStatus(status);
             if (data.resultCode === 0) {
                 dispatch(setStatus(status));
-            };
-}
+            }
+};
 
 export default profileReducer;

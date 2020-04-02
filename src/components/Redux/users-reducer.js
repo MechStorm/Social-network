@@ -11,7 +11,7 @@ const TOGGLE_IS_PROCESS = "social-network/users/TOGGLE-IS-PROCESS";
 
 let initialState = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalCount: 0,
     currentPage: 1,
     isFetching: false,

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "59677ed681d8920874ed933d9f3de25f",
+    "revision": "d22da2bf227f7c843dd9f1aa6d17876a",
     "url": "/Social-network/index.html"
   },
   {
@@ -12,11 +12,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Social-network/static/css/4.63bb31ef.chunk.css"
   },
   {
-    "revision": "ac85b65a583bf1d41712",
+    "revision": "19d2cbf628a1d0f8cbdf",
     "url": "/Social-network/static/css/5.acb8037f.chunk.css"
   },
   {
-    "revision": "ed5be108e681682f5035",
+    "revision": "b0b89cfa931806eba751",
     "url": "/Social-network/static/css/6.80e341a1.chunk.css"
   },
   {
@@ -32,7 +32,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Social-network/static/css/9.25b44a53.chunk.css"
   },
   {
-    "revision": "15c91e2aa55ff740fe8f",
+    "revision": "4e7e63c0bb55285a672d",
     "url": "/Social-network/static/css/main.cf70891d.chunk.css"
   },
   {
@@ -44,20 +44,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Social-network/static/js/10.3aec72c3.chunk.js"
   },
   {
-    "revision": "06c9b3121a4af0ba55d8",
-    "url": "/Social-network/static/js/3.54bbe231.chunk.js"
+    "revision": "4d604b6a83bae7ef69e4",
+    "url": "/Social-network/static/js/3.a6f202be.chunk.js"
   },
   {
     "revision": "d3a758ba1de62fed1c3f",
     "url": "/Social-network/static/js/4.69865cd3.chunk.js"
   },
   {
-    "revision": "ac85b65a583bf1d41712",
-    "url": "/Social-network/static/js/5.b9c09172.chunk.js"
+    "revision": "19d2cbf628a1d0f8cbdf",
+    "url": "/Social-network/static/js/5.b3681e6d.chunk.js"
   },
   {
-    "revision": "ed5be108e681682f5035",
-    "url": "/Social-network/static/js/6.55fe1da3.chunk.js"
+    "revision": "b0b89cfa931806eba751",
+    "url": "/Social-network/static/js/6.702718c8.chunk.js"
   },
   {
     "revision": "4d1a8e2f38c96e6afca4",
@@ -72,12 +72,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Social-network/static/js/9.58ab568d.chunk.js"
   },
   {
-    "revision": "15c91e2aa55ff740fe8f",
-    "url": "/Social-network/static/js/main.5e72d5fa.chunk.js"
+    "revision": "4e7e63c0bb55285a672d",
+    "url": "/Social-network/static/js/main.cfb19220.chunk.js"
   },
   {
-    "revision": "e73749d0cfba6e576334",
-    "url": "/Social-network/static/js/runtime-main.85a79111.js"
+    "revision": "b95e8a6288371b300b44",
+    "url": "/Social-network/static/js/runtime-main.b87dd507.js"
   },
   {
     "revision": "2e0845607e66ff070d8d5d34c3629ffa",

@@ -1,9 +1,11 @@
 import {profileApi} from "../../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "social-network/profile/ADD-POST";
 const PROFILE_LOADING = "social-network/profile/PROFILE-LOADING";
 const SET_STATUS = "social-network/profile/SET-STATUS";
 const DELETE_POST = "social-network/profile/DELETE-POST";
+const SET_PHOTO = "social-network/profile/SET-PHOTO";
 
 let initialState = {
     postData: [
@@ -54,15 +56,21 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 postData: state.postData.filter(p => p.id !== action.postID)
             };
+        case SET_PHOTO:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            };
         default:
             return state;
     }
 };
 
-export const addPost = (textPost) => ({type: ADD_POST, textPost});
+export const addPost = textPost => ({type: ADD_POST, textPost});
 export const profileLoading = profile => ({type: PROFILE_LOADING, profile});
 export const setStatus = status => ({type: SET_STATUS, status});
-export const deletePost = (postID) => ({type: DELETE_POST, postID});
+export const deletePost = postID => ({type: DELETE_POST, postID});
+export const setPhoto = photos => ({type: SET_PHOTO, photos});
 
 export const getProfile = userID => async dispatch => {
     let data = await profileApi.getProfile(userID);
@@ -80,5 +88,25 @@ export const updateProfileStatus = status => async dispatch => {
                 dispatch(setStatus(status));
             }
 };
+
+export const setUserPhoto = photo => async dispatch => {
+    let data = await profileApi.saveUserPhoto(photo);
+    if (data.resultCode === 0) {
+        dispatch(setPhoto(data.data.photos));
+    }
+};
+
+export const saveProfile = profile => async (dispatch, getState) => {
+    let userID = getState().userAuth.id;
+    let data = await profileApi.saveProfile(profile);
+    console.log(data);
+    if(data.resultCode === 0) {
+        dispatch(getProfile(userID));
+    } else {
+        let message = data.messages.length > 0 ? data.messages[0] : "Another err";
+        dispatch(stopSubmit('edit-profile', {_error: message}));
+        return Promise.reject(message);
+    }
+}
 
 export default profileReducer;

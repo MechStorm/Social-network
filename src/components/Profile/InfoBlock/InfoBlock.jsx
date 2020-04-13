@@ -1,40 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import st from "./InfoBlock.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import profileImg from '../../../assets/userProfile.png';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileInfo from "./ProfileInfo";
+import ProfileInfoForm from "./ProfileInfoForm";
 
-const InfoBlock = ({profile, status, updateStatus}) => {
-  if (!profile) {
-    return <Preloader />;
-  }
+const InfoBlock = ({profile, status, updateStatus, setUserPhoto, isOwner, saveProfile}) => {
 
-  let contacts = profile.contacts;
+    let [editMode, setEditMode] = useState(false);
 
-  return (
-    <div>
-      <div className={st.description}>
-        <img src={profile.photos.large != null ? profile.photos.large : profileImg} alt="profileImg" />
-          <ProfileStatusWithHooks className={st.about} status={status} updateStatus={updateStatus} />
-        <div className={st.contacts}>
-          <ul>Contacts:
-            <li>facebook: {contacts.facebook ? contacts.facebook : 'not yet'}</li>
-            <li>website: {contacts.website ? contacts.website : 'not yet'}</li>
-            <li>vk: {contacts.vk ? contacts.vk : 'not yet'}</li>
-            <li>twitter: {contacts.twitter ? contacts.website : 'not yet'}</li>
-            <li>instagram: {contacts.instagram ? contacts.instagram : 'not yet'}</li>
-            <li>youtube: {contacts.youtube ? contacts.youtube : 'not yet'}</li>
-            <li>github: {contacts.github ? contacts.github : 'not yet'}</li>
-            <li>mainlink: {contacts.mainlink ? contacts.mainlink : 'not yet'}</li>
-          </ul>
+    if (!profile) {
+        return <Preloader/>;
+    }
+
+    let onSetPhoto = (e) => {
+        if (e.target.files.length) {
+            setUserPhoto(e.target.files[0]);
+        }
+    };
+
+    const dataFromProfile = (formData) => {
+        saveProfile(formData).then(()=>{
+            setEditMode(false);
+        });
+    }
+
+    return (
+        <div className={st.description}>
+            <img src={profile.photos.large != null ? profile.photos.large : profileImg} alt="profileImg"/>
+            <ProfileStatusWithHooks className={st.about} status={status} updateStatus={updateStatus}/>
+            {isOwner && <input type={"file"} onChange={onSetPhoto}/>}
+            {
+                editMode ? <ProfileInfoForm initialValues={profile} profile={profile} onSubmit={dataFromProfile}/> :
+                <ProfileInfo profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>
+            }
         </div>
-        <p>looking for a job: {profile.lookingForAJob ? ':)' : ':('}</p>
-        <p>looking for a job description: {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : 'not data'}</p>
-        <p>fullname: {profile.fullName ? profile.fullName : 'not data'}</p>
-        <p>UserID: {profile.userId ? profile.userId : 'not data'}</p>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default InfoBlock;

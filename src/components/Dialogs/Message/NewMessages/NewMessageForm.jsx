@@ -1,5 +1,5 @@
 import React from "react";
-import {reduxForm} from "redux-form";
+import {reduxForm, reset} from "redux-form";
 import {maxLengthValidation, required} from "../../../utils/validation";
 import {createField, FieldRequiredForm} from "../../../utils/FieldLevelValidationForm";
 
@@ -16,4 +16,8 @@ const NewMessageForm = props => {
     );
 };
 
-export default reduxForm({form: 'messages'})(NewMessageForm);
+const afterSubmit = (res, dispatch) => {
+    dispatch(reset('messages'));
+};
+
+export default reduxForm({form: 'messages', onSubmitSuccess: afterSubmit})(NewMessageForm);

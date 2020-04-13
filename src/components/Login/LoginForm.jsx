@@ -2,7 +2,7 @@ import React from "react";
 import {reduxForm} from "redux-form";
 import {maxLengthValidation, required} from "../utils/validation";
 import {createField, FieldRequiredForm} from "../utils/FieldLevelValidationForm";
-import st from '../Login/LoginPage.module.css';
+import e from '../common/Errors/Errors.module.css';
 
 const maxLength25 = maxLengthValidation(25);
 const maxLength20 = maxLengthValidation(20);
@@ -26,7 +26,7 @@ const LoginForm = ({handleSubmit, pristine, error}) => {
 
             <button disabled={pristine}>Login</button>
             {
-                error && <div className={st.errMsg}>
+                error && <div className={e.errMsg}>
                     {error}
                 </div>
             }

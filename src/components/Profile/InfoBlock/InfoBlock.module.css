@@ -10,7 +10,7 @@
 }
 
 .description img{
-    width: 300px;
+    max-width: 220px;
 }
 
 ul{

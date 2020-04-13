@@ -1,6 +1,6 @@
 import React, {lazy, Suspense} from "react";
 import "./App.css";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Route, withRouter} from "react-router-dom";
 import NavigationContainer from "./components/Navbar/NavigationContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
@@ -29,21 +29,21 @@ class App extends React.Component {
                 <NavigationContainer/>
                 <HeaderContainer/>
                 <div className="wrapper-content">
-                    <Suspense fallback={<Preloader />}>
+                    <Suspense fallback={<Preloader/>}>
                         <Route path="/profile/:userID?">
-                            <ProfileContainer />
+                            <ProfileContainer/>
                         </Route>
                         <Route path="/dialogs">
-                            <DialogsContainer />
+                            <DialogsContainer/>
                         </Route>
                         <Route path="/news">
-                            <News />
+                            <News/>
                         </Route>
                         <Route path="/music">
-                            <Music />
+                            <Music/>
                         </Route>
                         <Route path="/settings">
-                            <Settings />
+                            <Settings/>
                         </Route>
                         <Route path="/users">
                             <UsersContainer/>
@@ -68,11 +68,11 @@ let AppContainer = compose(withRouter, connect(mapStateToProps, {getInitialize})
 
 const SocialNetworkApp = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     );
 };
 

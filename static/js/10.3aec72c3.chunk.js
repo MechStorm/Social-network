@@ -1,2 +1,0 @@
-(this["webpackJsonpnew-app"]=this["webpackJsonpnew-app"]||[]).push([[10],{305:function(n,t,e){},310:function(n,t,e){"use strict";e.r(t);var s=e(0),a=e.n(s),c=e(305),i=e.n(c);t.default=function(){return a.a.createElement("div",{className:i.a.settingsBlock},"Settings")}}}]);
-//# sourceMappingURL=10.3aec72c3.chunk.js.map

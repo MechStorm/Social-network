@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import st from './Pagination.module.css';
+import cn from "classnames";
 
 const Pagination = ({totalItemCount, pageSize, currentPage, onPageChange, portionSize = 10}) => {
     let totalPagesCount = Math.ceil(totalItemCount / pageSize);
@@ -20,7 +21,7 @@ const Pagination = ({totalItemCount, pageSize, currentPage, onPageChange, portio
                 {
                     pages
                         .filter(p => p >= leftBorderedNum && p <= rightBorderedNum)
-                        .map(p => <span className={currentPage === p && st.activeNum}
+                        .map(p => <span key={p} className={cn({[st.chooseNum]: currentPage === p}, st.activeNumbers)}
                                         onClick={() => onPageChange(p)}>{p}</span>)
                 }
                 {portionCount > portionNum && <button className={st.btnNext} onClick={() => setPortionNum(portionNum + 1)}>Next</button>}

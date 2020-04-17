@@ -25,6 +25,6 @@ export const getInitialize = () => dispatch => {
         Promise.all([promiseAuth]).then(()=>{
             dispatch(initializingProcess());
         });
-    };
+};
 
 export default appReducer;

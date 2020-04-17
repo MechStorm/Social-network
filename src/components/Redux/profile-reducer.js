@@ -78,15 +78,19 @@ export const getProfile = userID => async dispatch => {
 };
 
 export const getProfileStatus = userID => async dispatch => {
-    let status = await profileApi.getProfileStatus(userID);
+        let status = await profileApi.getProfileStatus(userID);
         dispatch(setStatus(status));
 };
 
 export const updateProfileStatus = status => async dispatch => {
-    let data = await profileApi.updateProfileStatus(status);
-            if (data.resultCode === 0) {
-                dispatch(setStatus(status));
-            }
+    // try {
+        let data = await profileApi.updateProfileStatus(status);
+        if (data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
+        /*} catch (e) {
+            alert(`catch the error - ${e.message}`);
+        }*/
 };
 
 export const setUserPhoto = photo => async dispatch => {
@@ -99,7 +103,6 @@ export const setUserPhoto = photo => async dispatch => {
 export const saveProfile = profile => async (dispatch, getState) => {
     let userID = getState().userAuth.id;
     let data = await profileApi.saveProfile(profile);
-    console.log(data);
     if(data.resultCode === 0) {
         dispatch(getProfile(userID));
     } else {

@@ -9,7 +9,7 @@ const maxLength20 = maxLengthValidation(20);
 
 const Input = FieldRequiredForm("input");
 
-const LoginForm = ({handleSubmit, pristine, error}) => {
+const LoginForm = ({handleSubmit, pristine, error, captchaUrl}) => {
     return (
         <form onSubmit={handleSubmit}>
             {
@@ -25,6 +25,12 @@ const LoginForm = ({handleSubmit, pristine, error}) => {
             }
 
             <button disabled={pristine}>Login</button>
+
+            <div>
+                {captchaUrl && <img src={captchaUrl} alt="" /> }
+                {captchaUrl && createField(null, "captcha", "captcha", Input, {type: "text"}, [required])}
+            </div>
+
             {
                 error && <div className={e.errMsg}>
                     {error}

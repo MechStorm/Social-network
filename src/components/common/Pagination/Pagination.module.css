@@ -4,15 +4,15 @@
     justify-content: space-around;
 }
 
-.numbers>span {
+.activeNumbers {
     border: 1px double gray;
 }
 
-.numbers>span:hover {
+.activeNumbers:hover {
     color: gold;
 }
 
-.activeNum {
+.chooseNum {
     color: blue;
     font-weight: 700;
 }

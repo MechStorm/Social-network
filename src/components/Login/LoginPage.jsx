@@ -8,8 +8,8 @@ import {Redirect} from "react-router-dom";
 class LoginPage extends React.Component {
 
     login = (data) => {
-        let {login, pass, rememberMe} = {...data};
-        this.props.userLogin(login, pass, rememberMe);
+        let {login, pass, rememberMe, captcha} = {...data};
+        this.props.userLogin(login, pass, rememberMe, captcha);
     }
 
     render() {
@@ -19,7 +19,7 @@ class LoginPage extends React.Component {
 
         return <div className={st.loginField}>
             <h1>Login</h1>
-            <LoginForm onSubmit={this.login}/>
+            <LoginForm onSubmit={this.login} captchaUrl={this.props.captcha} />
         </div>
     }
 }
@@ -27,7 +27,8 @@ class LoginPage extends React.Component {
 let mapStateToProps = state => {
     return {
         isAuth: state.userAuth.isAuth,
-        id: state.userAuth.id
+        id: state.userAuth.id,
+        captcha: state.userAuth.captcha
     }
 };
 

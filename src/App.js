@@ -1,6 +1,6 @@
 import React, {lazy, Suspense} from "react";
 import "./App.css";
-import {HashRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import NavigationContainer from "./components/Navbar/NavigationContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
@@ -18,8 +18,18 @@ const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
 const LoginPage = lazy(() => import('./components/Login/LoginPage'));
 
 class App extends React.Component {
+
+    catchingErrorMessage(e){
+        alert(e.reason.message);
+    }
+
     componentDidMount() {
         this.props.getInitialize();
+        window.addEventListener("unhandledrejection", this.catchingErrorMessage);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", this.catchingErrorMessage);
     }
 
     render() {
@@ -30,27 +40,33 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <div className="wrapper-content">
                     <Suspense fallback={<Preloader/>}>
-                        <Route path="/profile/:userID?">
-                            <ProfileContainer/>
-                        </Route>
-                        <Route path="/dialogs">
-                            <DialogsContainer/>
-                        </Route>
-                        <Route path="/news">
-                            <News/>
-                        </Route>
-                        <Route path="/music">
-                            <Music/>
-                        </Route>
-                        <Route path="/settings">
-                            <Settings/>
-                        </Route>
-                        <Route path="/users">
-                            <UsersContainer/>
-                        </Route>
-                        <Route path="/login">
-                            <LoginPage/>
-                        </Route>
+                        <Switch>
+                            <Redirect exact from="/" to="/news"/>
+                            <Route path="/profile/:userID?">
+                                <ProfileContainer/>
+                            </Route>
+                            <Route path="/dialogs">
+                                <DialogsContainer/>
+                            </Route>
+                            <Route path="/news">
+                                <News/>
+                            </Route>
+                            <Route path="/music/genre">
+                                <div>Genre</div>
+                            </Route>
+                            <Route path="/music">
+                                <Music/>
+                            </Route>
+                            <Route path="/settings">
+                                <Settings/>
+                            </Route>
+                            <Route path="/users">
+                                <UsersContainer/>
+                            </Route>
+                            <Route path="/login">
+                                <LoginPage/>
+                            </Route>
+                        </Switch>
                     </Suspense>
                 </div>
             </div>

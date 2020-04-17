@@ -1,9 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import st from "./Header.module.css";
 import userPhoto from "../../assets/userphoto.png";
 import {NavLink} from "react-router-dom";
 
 const Header = props => {
+
+    let [profile, setProfile] = useState(props.profile);
+
+    useEffect(() => {
+        setProfile(profile);
+    }, [profile]);
+
     return (
         <header className={st.header}>
             <div className={st.headerLogo}>
@@ -13,12 +20,12 @@ const Header = props => {
                 />
             </div>
             <div className={st.authField}>
-                {(props.isAuth && !!props.userProfile) ?
+                {(props.isAuth && !!props.profile) ?
 
                     <div className={st.userLog}>
                         <div className={st.userAva}>
-                            <img src={props.userProfile.photos.small != null ? props.userProfile.photos.small : userPhoto}
-                            alt="ava"/>
+                            <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto}
+                                 alt="ava"/>
                         </div>
 
                         <div>
